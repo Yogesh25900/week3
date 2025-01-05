@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "665412918645",
+    "firebase_url": "https://otpverify-db014-default-rtdb.firebaseio.com",
+    "project_id": "otpverify-db014",
+    "storage_bucket": "otpverify-db014.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665412918645:android:ea87a10443ed956c11873c",
+        "android_client_info": {
+          "package_name": "com.example.week3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU2FYk5eGLYQ6W1T94tqfRUyVuomWCch8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

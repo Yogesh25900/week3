@@ -1,24 +1,34 @@
 package com.example.week3
 
+
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.week3.databinding.ActivityMainBinding
+import com.example.week3.R
+import com.example.week3.helper.CustomNotificationHelper
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var notificationHelper: CustomNotificationHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.activity_main)
+
+        notificationHelper = CustomNotificationHelper(this)
+
+        // Example button to trigger notification
+        val showNotificationButton: Button = findViewById(R.id.button)
+        showNotificationButton.setOnClickListener {
+            // Show custom notification
+            notificationHelper.showCustomNotification(
+                "New Custom Notification",
+                "This is a custom message for the user.",
+                R.drawable.vidgram_logo_top
+            )
+
+            Toast.makeText(this, "Notification sent", Toast.LENGTH_SHORT).show()
         }
     }
 }

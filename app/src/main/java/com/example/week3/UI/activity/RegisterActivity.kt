@@ -1,21 +1,28 @@
-package com.example.week3.UI.activity
+package com.example.week3.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.week3.R
-import com.example.week3.databinding.ActivityLoginBinding
+import com.example.week3.UI.activity.LoginActivity
 import com.example.week3.databinding.ActivityRegisterBinding
+import com.example.week3.model.UserModel
+import com.example.week3.respository.UserRepositoryImp
+import com.example.week3.utils.LoadingUtils
+import com.example.week3.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    lateinit var firebaseAuth: FirebaseAuth
+    private  lateinit var userViewModel :UserViewModel
+    lateinit var loadingUtils: LoadingUtils
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,34 +30,49 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth =FirebaseAuth.getInstance()
-        var database :FirebaseDatabase = FirebaseDatabase.getInstance()
-        var reference = database.reference.child("users")
+        loadingUtils = LoadingUtils(this)
 
-        binding.tvLogin.setOnClickListener{
-            val intent = Intent(this,LoginActivity::class.java)
+        binding.tvLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
+        val repo = UserRepositoryImp()
+        userViewModel = UserViewModel(repo)
 
-        binding.btnRegister.setOnClickListener{
+        binding.btnRegister.setOnClickListener {
+            loadingUtils.show()
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
-                if(it.isSuccessful){
-                    val userid = firebaseAuth.currentUser?.uid
-                    reference.child(userid.toString())
-                    Toast.makeText(this@RegisterActivity,"Registered Successfully",Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(this@RegisterActivity,
-                        it.exception?.message.toString(),Toast.LENGTH_LONG).show()
+            val fname = binding.firstname.text.toString()
+            val address = binding.address.text.toString()
+            val lname = binding.lastname.text.toString()
+            val phone = binding.phone.text.toString()
 
-                }
+
+            userViewModel.register(email,password){
+                success,message,userID ->
+                Log.d("RegisterActivity", "Register callback invoked. Success: $success, Message: $message")
+
+                if(success){
+                    Log.d("RegisterActivity", "UserID: $userID. Calling addUser...")
+
+                    var usermodel = UserModel(userID.toString(),fname,lname,address,phone,email,password)
+                        addUser(usermodel)
+//                        loadingUtils.dismiss()
+                    }else{
+                        loadingUtils.dismiss()
+                    Log.e("RegisterActivity", "Registration failed: $message")
+
+
+                    Toast.makeText(this@RegisterActivity,message,Toast.LENGTH_SHORT).show()
+                    }
+
             }
+
+
+
         }
-
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -58,4 +80,28 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
     }
-}
+
+    private fun addUser(userModel: UserModel) {
+
+        userViewModel.addUserToDatabase(userModel.userid, userModel) { success, message ->
+            Log.d("RegisterActivity from add user", "AddUser callback invoked. Success: $success, Message: $message")
+
+
+            if (success) {
+                Log.d("RegisterActivity", "user registered successfull")
+
+                Toast.makeText(
+                    this@RegisterActivity,
+                    message, Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Log.d("error from adduser",message)
+                Toast.makeText(
+                    this@RegisterActivity,
+                    message, Toast.LENGTH_LONG
+                ).show()
+
+            }
+            loadingUtils.dismiss()
+
+        }}}

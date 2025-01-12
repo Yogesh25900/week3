@@ -19,6 +19,7 @@ android {
     }
     buildFeatures{
         viewBinding =true
+        dataBinding = true
     }
 
     buildTypes {
@@ -52,5 +53,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.material.v190)
+
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 
 }

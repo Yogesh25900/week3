@@ -27,7 +27,7 @@ interface UserRepository {
 
     fun getCurrentUser(): FirebaseUser?
 
-    fun getUserfromdatabase(userID: String,callback: (UserModel,Boolean, String) -> Unit)
+    fun getUserfromdatabase(userID: String,callback: (UserModel?,Boolean, String) -> Unit)
 
 
 }

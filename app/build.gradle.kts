@@ -49,14 +49,22 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.material.v190)
 
 
+    implementation("com.github.bumptech.glide:glide:4.15.1") // Or the latest version
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")// Or the latest version
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+//    implementation("com.cloudinary:kotlin-url-gen:1.7.0")
+
+    implementation("com.cloudinary:cloudinary-android:3.0.2")
+
 
 
 }

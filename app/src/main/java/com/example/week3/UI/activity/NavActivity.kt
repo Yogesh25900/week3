@@ -1,6 +1,7 @@
 package com.example.week3.UI.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.week3.ui.fragment.CartFragment
-import com.example.week3.ui.fragment.HomeFragment
-import com.example.week3.ui.fragment.ProfileFragment
 import com.example.week3.R
 import com.example.week3.databinding.ActivityNavBinding
+import com.example.week3.ui.fragment.HomeFragment
+import com.example.week3.ui.fragment.ProfileFragment
 
 class NavActivity : AppCompatActivity() {
 
@@ -40,7 +40,12 @@ class NavActivity : AppCompatActivity() {
             navigationBinding.buttomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.menuHome -> replaceFragment(HomeFragment())
-                    R.id.menuCart -> replaceFragment(CartFragment())
+                    R.id.menuCart -> {
+                        val intent = Intent(this, AddPostActivity::class.java)
+                        startActivityForResult(intent, 100)
+                        finish()
+                        true
+                    }
                     R.id.menuProfile -> replaceFragment(ProfileFragment())
                     else -> {}
                 }
@@ -52,4 +57,5 @@ class NavActivity : AppCompatActivity() {
                 insets
             }
         }
+
     }

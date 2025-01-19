@@ -1,7 +1,10 @@
 package com.example.week3.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.week3.model.UserModel
 import com.example.week3.respository.UserRepository
+import com.google.firebase.auth.FirebaseUser
 
 class UserViewModel (val repo: UserRepository){
 
@@ -24,4 +27,27 @@ class UserViewModel (val repo: UserRepository){
     ){
         repo.addUserToDatabase(userId,userModel,callback)
     }
+
+    fun getCurrentUser(): FirebaseUser?{
+        return repo.getCurrentUser()
+    }
+
+    var _userData = MutableLiveData<UserModel?>()
+
+    var userdata =MutableLiveData<UserModel?>()
+
+        get() = _userData
+    fun getUserFromDatabase(userID: String) {
+        repo.getUserfromdatabase(userID) { user, success, message ->
+            if (success) {
+                _userData.value = user
+            } else {
+
+                println("Error: $message")
+            }
+        }
+    }
+
+
+
 }

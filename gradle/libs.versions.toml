@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.2"
+cloudinaryAndroid = "2.0.0"
 kotlin = "1.9.24"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -14,9 +15,11 @@ firebaseAuth = "23.1.0"
 firebaseDatabase = "21.0.0"
 materialVersion = "1.9.0"
 squareupRetrofit = "2.9.0"
+firebaseStorageKtx = "21.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+cloudinary-android = { module = "com.cloudinary.android:cloudinary-android", version.ref = "cloudinaryAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -29,6 +32,7 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareupRetrofit" }
 xconverter-gson = { module = "com.squareup.retrofit2:)converter-gson", version.ref = "squareupRetrofit" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

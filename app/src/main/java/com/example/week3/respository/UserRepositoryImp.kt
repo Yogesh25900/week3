@@ -7,8 +7,11 @@ import com.example.week3.UI.activity.LoginActivity
 import com.example.week3.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class UserRepositoryImp : UserRepository {
     private  var auth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -113,8 +116,20 @@ class UserRepositoryImp : UserRepository {
 
     override fun getUserfromdatabase(
         userID: String,
-        callback: (UserModel, Boolean, String) -> Unit
+        callback: (UserModel?, Boolean, String) -> Unit
     ) {
+        reference.child(userID).addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    var usermodel = snapshot.getValue(UserModel::class.java)
+                    callback(usermodel,true,"data Fetched successfully")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null,false,error.message)
+            }
+        })
     }
 
 }

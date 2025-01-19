@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Profile Image Section -->
+    <ImageView
+        android:id="@+id/ivPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/min"
+        android:scaleType="centerCrop"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- Caption Field -->
+    <EditText
+        android:id="@+id/etCaption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write a caption..."
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Button to Save Post -->
+    <Button
+        android:id="@+id/addpost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Post" />
+
+</LinearLayout>

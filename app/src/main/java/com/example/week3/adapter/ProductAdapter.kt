@@ -54,6 +54,10 @@ class ProductAdapter(
 
     }
 
+    fun getProductbyid(position: Int):String
+    {
+        return data[position].productID.toString()
+    }
 
 }
 

@@ -3,6 +3,8 @@ package com.example.week3.model
 import android.os.Parcel
 import android.os.Parcelable
 
+
+
 data class ProductModel(
     var productID:String?,
     var productName : String?,

@@ -17,4 +17,5 @@ interface ProductRepository {
                         callback: (ProductModel?,Boolean, String) -> Unit)
 
      fun getAllProducts(callback: (List<ProductModel>,Boolean, String) -> Unit)
+
 }

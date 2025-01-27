@@ -64,7 +64,8 @@ dependencies {
 //    implementation("com.cloudinary:kotlin-url-gen:1.7.0")
 
     implementation(libs.cloudinary.cloudinary.android)
-
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
 
 }

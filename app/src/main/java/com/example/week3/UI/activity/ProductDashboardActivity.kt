@@ -1,15 +1,19 @@
 package com.example.week3.UI.activity
 
+import android.content.ClipData.Item
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.week3.R
 import com.example.week3.adapter.ProductAdapter
 import com.example.week3.databinding.ActivityProductDashboardBinding
@@ -65,6 +69,34 @@ class ProductDashboardActivity : AppCompatActivity() {
 //            productAdapter.(products)
 //        })
 
+
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, // dragDirs
+            ItemTouchHelper.LEFT // swipeDirs (swiping left)
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                var productid = productAdapter.getProductbyid(viewHolder.adapterPosition)
+                productViewModel.deleteProduct(productid){
+                    success,message ->
+                    if(success){
+                        Toast.makeText(this@ProductDashboardActivity,message,Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this@ProductDashboardActivity,message,Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+
+        }).attachToRecyclerView(binding.productlist)
         // Fetch all products from the ViewModel
 //        productViewModel.getAllProducts()
 
@@ -74,6 +106,8 @@ class ProductDashboardActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
 
         // Handle system window insets (for edge-to-edge UI)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

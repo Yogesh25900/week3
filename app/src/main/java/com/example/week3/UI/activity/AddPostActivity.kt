@@ -61,6 +61,7 @@ class AddPostActivity : Activity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             imageUri = data.data
+            Log.d("URI" , "imageuri:$imageUri")
             ivPostImage.setImageURI(imageUri)
         }
     }

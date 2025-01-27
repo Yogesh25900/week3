@@ -2,6 +2,7 @@ package com.example.week3.UI.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +15,7 @@ import com.example.week3.adapter.ProductAdapter
 import com.example.week3.databinding.ActivityProductDashboardBinding
 import com.example.week3.respository.ProductRepositoryImp
 import com.example.week3.viewmodel.ProductViewModel
+import java.util.ArrayList
 
 class ProductDashboardActivity : AppCompatActivity() {
     lateinit var binding: ActivityProductDashboardBinding
@@ -27,9 +29,29 @@ class ProductDashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Initialize ViewModel
-//        val repo = ProductRepositoryImp()
-//        productViewModel =ProductViewModel(repo)
+        val repo = ProductRepositoryImp()
+        productViewModel =ProductViewModel(repo)
 
+        productAdapter = ProductAdapter(this@ProductDashboardActivity, ArrayList())
+
+        productViewModel.getAllProducts()
+
+        productViewModel.AllProducts.observe(this@ProductDashboardActivity){
+            it?.let {
+                productAdapter.updateData(it)
+            }
+        }
+
+        productViewModel.loading.observe(this){
+            loading->
+            if(loading){
+                binding.progressBar.visibility = View.VISIBLE
+            }else{
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+        binding.productlist.adapter = productAdapter
+        binding.productlist.layoutManager= (LinearLayoutManager(this))
         // Set up RecyclerView with ViewBinding
 //        binding.productlist.layoutManager = LinearLayoutManager(this)
 

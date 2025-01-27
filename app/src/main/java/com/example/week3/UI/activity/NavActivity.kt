@@ -43,7 +43,6 @@ class NavActivity : AppCompatActivity() {
                     R.id.menuCart -> {
                         val intent = Intent(this, AddPostActivity::class.java)
                         startActivityForResult(intent, 100)
-                        finish()
                         true
                     }
                     R.id.menuProfile -> replaceFragment(ProfileFragment())

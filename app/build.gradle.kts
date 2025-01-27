@@ -63,7 +63,7 @@ dependencies {
 
 //    implementation("com.cloudinary:kotlin-url-gen:1.7.0")
 
-    implementation("com.cloudinary:cloudinary-android:3.0.2")
+    implementation(libs.cloudinary.cloudinary.android)
 
 
 

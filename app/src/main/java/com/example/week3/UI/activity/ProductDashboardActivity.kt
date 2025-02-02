@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a35b_crud.adapter.ProductAdapter
 import com.example.week3.R
-import com.example.week3.adapter.ProductAdapter
 import com.example.week3.databinding.ActivityProductDashboardBinding
 import com.example.week3.respository.ProductRepositoryImp
 import com.example.week3.viewmodel.ProductViewModel
@@ -84,14 +84,15 @@ class ProductDashboardActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                var productid = productAdapter.getProductbyid(viewHolder.adapterPosition)
-                productViewModel.deleteProduct(productid){
-                    success,message ->
-                    if(success){
-                        Toast.makeText(this@ProductDashboardActivity,message,Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this@ProductDashboardActivity,message,Toast.LENGTH_SHORT).show()
+                var productid = productAdapter.getProductId(viewHolder.adapterPosition)
+                if (productid != null) {
+                    productViewModel.deleteProduct(productid){ success,message ->
+                        if(success){
+                            Toast.makeText(this@ProductDashboardActivity,message,Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(this@ProductDashboardActivity,message,Toast.LENGTH_SHORT).show()
 
+                        }
                     }
                 }
             }
@@ -104,7 +105,6 @@ class ProductDashboardActivity : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, AddProductActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
 

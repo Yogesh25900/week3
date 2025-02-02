@@ -9,15 +9,20 @@ data class ProductModel(
     var productID:String?,
     var productName : String?,
     var productDesc:String?,
-    var price :Int =0
-):Parcelable
+    var price :Int =0,
+    var imageUrl : String = "",
+
+
+    ):Parcelable
 {
     constructor(parcel: Parcel) : this(
         parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readString()?:"",
-        parcel.readInt()
-    ) {
+        parcel.readInt(),
+        parcel.readString() ?: "",
+
+        ) {
     }
 
     // No-argument constructor required for Firebase
@@ -28,6 +33,8 @@ data class ProductModel(
         parcel.writeString(productName)
         parcel.writeString(productDesc)
         parcel.writeInt(price)
+        parcel.writeString(imageUrl)
+
     }
 
     override fun describeContents(): Int {

@@ -15,6 +15,7 @@ googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 firebaseDatabase = "21.0.0"
 materialVersion = "1.9.0"
+picasso = "2.71828"
 squareupRetrofit = "2.9.0"
 firebaseStorageKtx = "21.0.1"
 
@@ -32,6 +33,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareupRetrofit" }
 xconverter-gson = { module = "com.squareup.retrofit2:)converter-gson", version.ref = "squareupRetrofit" }
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }

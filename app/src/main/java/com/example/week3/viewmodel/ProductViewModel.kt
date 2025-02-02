@@ -1,5 +1,7 @@
 package com.example.week3.viewmodel
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.example.week3.model.ProductModel
 import com.example.week3.respository.ProductRepository
@@ -22,8 +24,8 @@ class ProductViewModel (val repo :ProductRepository) {
     }
 
 
-    var _products = MutableLiveData<ProductModel>()
-    var products = MutableLiveData<ProductModel>()
+    var _products = MutableLiveData<ProductModel?>()
+    var products = MutableLiveData<ProductModel?>()
         get() = _products
 
     var _AllProducts = MutableLiveData<List<ProductModel>>()
@@ -57,5 +59,8 @@ class ProductViewModel (val repo :ProductRepository) {
             }
 
         }
+    }
+    fun uploadImage(context: Context, imageUri: Uri, callback: (String?) -> Unit){
+        repo.uploadImage(context, imageUri, callback)
     }
 }

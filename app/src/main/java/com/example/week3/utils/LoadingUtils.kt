@@ -7,10 +7,10 @@ import com.example.week3.R
 
 class LoadingUtils(val activity: Activity) {
 
-    lateinit var  alertDialog: AlertDialog
+    lateinit var alertDialog: AlertDialog
 
-    fun show(){
-        val dialogview = activity.layoutInflater.inflate(R.layout.loading,null)
+    fun show() {
+        val dialogview = activity.layoutInflater.inflate(R.layout.loading, null)
 
         val builder = AlertDialog.Builder(activity)
         builder.setTitle("Please Wait")
@@ -18,10 +18,11 @@ class LoadingUtils(val activity: Activity) {
         builder.setCancelable(false) // Optional: Prevent dismissal by tapping outside
 
         alertDialog = builder.create()
-    alertDialog.show()
+        alertDialog.show()
     }
+
     fun dismiss() {
-            alertDialog.dismiss()
+        alertDialog.dismiss()
 
     }
 

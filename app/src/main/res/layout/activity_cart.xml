@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".UI.activity.CartActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Status message TextView -->
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cart Status"
+        android:textSize="18sp"
+        android:textColor="#FF0000"
+        android:visibility="gone" /> <!-- Hide initially -->
+
+    <!-- RecyclerView to display the cart items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        tools:listitem="@layout/item_cart" />
+
+    <!-- Add to cart button -->
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Cart"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Remove from cart button -->
+    <Button
+        android:id="@+id/removeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove from Cart"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Get all cart items button -->
+    <Button
+        android:id="@+id/getCartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Cart Items" />
+
+    <!-- Total price TextView -->
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Price: $0.00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="end"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+</LinearLayout>

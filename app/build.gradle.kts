@@ -66,6 +66,8 @@ dependencies {
     implementation(libs.cloudinary.cloudinary.android)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation(libs.picasso)
+
 
 
 }
